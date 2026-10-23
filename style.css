@@ -7,11 +7,14 @@
 html,body{
     height: 100%;
     width: 100%;
+    min-height: 100%;
 }
 
 :root{
     /* background colors */
     --bg-primary-color:#0c0c0c;
+    --bg-fill-color:#fdfdfc;
+    --bg-food-color:#e36f10;
 
     /* Text Colors */
     --text-primary-color:#f0f0f0;
@@ -27,6 +30,7 @@ html,body{
 
     /* Border color */
     --border-primary-color: #333333;
+
 
     /* Border Radius */
 
@@ -51,21 +55,38 @@ html{
 
 main,section{
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    height: 100dvh;
 }
 
 section{
-  padding: var(--space-2xl);
+  padding: clamp(12px, 4vw, var(--space-2xl));
   display: flex;
   flex-direction: column;
-  height:100% ;
-  gap: var(--space-lg);
+  min-height: 0;
+  gap: clamp(10px, 2.5vw, var(--space-lg));
+}
+
+.btn{
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--border-primary-color);
+    border-radius: var(--border-radius-sm);
+    background-color: transparent;
+    color: var(--text-primary-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover{
+    transform: scale(1.1);
 }
 
 section .infos{
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
 }
 
 .info{
@@ -75,18 +96,65 @@ section .infos{
 }
 
 .grid{
-    border: 1px solid var(--border-primary-color);
+    border: none;
     flex-grow: 1;
-     display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(30px,1fr));
-    grid-template-rows: repeat(auto-fill,minmax(30px,1fr));
-    
+    min-height: 0;
+    min-width: 0;
+    display: grid;
+    overflow: hidden;
 }
 
 .block{
-    width: 30px;
-    height: 30px;
-    border:1px solid var(--border-primary-color);
-   
+    min-width: 0;
+    min-height: 0;
+    border: none;
+}
+
+.fill{
+    background-color: var(--bg-fill-color);
+}
+
+.food{
+    background-color: var(--bg-food-color);
+}
+
+.modal{
+    height: 100dvh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-md);
+
+}
+
+.modal .start-game, .modal .game-over{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: var(--space-lg);
+
+}
+
+.modal .game-over {
+   display: none;
+}
+
+@media (max-width: 600px) {
+    .info {
+        padding: var(--space-xs) var(--space-sm);
+    }
+
+    .info h3 {
+        font-size: clamp(0.7rem, 3.2vw, 0.9rem);
+    }
+
+    .btn:hover {
+        transform: none;
+    }
 }
 
